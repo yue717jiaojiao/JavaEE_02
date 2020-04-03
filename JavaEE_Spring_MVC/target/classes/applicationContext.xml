@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -7,6 +6,14 @@
 
     <context:component-scan base-package = "code.controller" />
     <context:component-scan base-package = "code.aspect" />
-    <context:component-scan base-package = "code.bean" />
+<!--    <context:component-scan base-package = "code.bean" />-->
     <context:component-scan base-package = "code.service" />
+<!--id唯一标识bean，一个bean可以用多个名称-->
+<!--    <bean id="testBean" class="code.bean.TestBean" scope="prototype" name="testBean,testBean2">-->
+<!--&lt;!&ndash;        初始化&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg type="java.lang.Long" value="1"></constructor-arg>&ndash;&gt;-->
+<!--&lt;!&ndash;        <constructor-arg type="java.lang.String" value="One Name"></constructor-arg>&ndash;&gt;-->
+<!--        <constructor-arg name="id" value="1"></constructor-arg>-->
+<!--        <constructor-arg name="name" value="One Name"></constructor-arg>-->
+<!--    </bean>-->
 </beans>
