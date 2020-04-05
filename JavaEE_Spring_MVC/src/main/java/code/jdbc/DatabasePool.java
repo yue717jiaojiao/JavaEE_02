@@ -2,12 +2,16 @@ package code.jdbc;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class DatabasePool {
 
     private static HikariDataSource hikariDataSource;
 
     //双重锁
+    @Bean
     public static HikariDataSource getHikariDataSource(){
 
         if(null != hikariDataSource){

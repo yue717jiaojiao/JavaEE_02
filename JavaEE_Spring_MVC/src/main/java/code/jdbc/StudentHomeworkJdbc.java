@@ -4,10 +4,13 @@ package code.jdbc;
 import code.model.Homework;
 import code.model.Student;
 import code.model.StudentHomework;
+import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static code.jdbc.DatabasePool.getHikariDataSource;
 
 /**
  * StudentHomeworkJdbc
@@ -21,15 +24,16 @@ public class StudentHomeworkJdbc {
     private static String url = "jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC";
 
     private static String driverName = "com.mysql.cj.jdbc.Driver";
+    private static HikariDataSource dataSource = getHikariDataSource();
 
-    public static boolean addStudentHomework(StudentHomework sh){
+                        public static boolean addStudentHomework(StudentHomework sh){
 
         int resultSet = 0;
         try {
             Class.forName(driverName);
             String sqlString = "insert into s_student_homework (student_id,homework_id,homework_title,homework_content,student_answer,create_time) values(?,?,?,?,?,?)";
 
-            Connection connection = DriverManager.getConnection(url, "root", "123456");
+            Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(sqlString);
 
             ps.setLong(1,sh.getStudentId());
@@ -62,7 +66,7 @@ public class StudentHomeworkJdbc {
         }
 
         List<StudentHomework> list = new ArrayList<>();
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+        try(Connection connection =  dataSource.getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -91,7 +95,7 @@ public class StudentHomeworkJdbc {
             Class.forName(driverName);
             String sqlString = "insert into student (id,sname,create_time) values(?,?,?)";
 
-        Connection connection = DriverManager.getConnection(url, "root", "123456");
+        Connection connection = dataSource.getConnection();;
         PreparedStatement ps = connection.prepareStatement(sqlString);
                 ps.setLong(1,student.getId());
                 ps.setString(2,student.getName());
@@ -114,7 +118,7 @@ public class StudentHomeworkJdbc {
             Class.forName(driverName);
             String sqlString = "insert into homework (h_id,title,content,create_time) values(?,?,?,?)";
 
-            Connection connection = DriverManager.getConnection(url, "root", "123456");
+            Connection connection = dataSource.getConnection();
             PreparedStatement ps = connection.prepareStatement(sqlString);
             ps.setLong(1,homework.getId());
             ps.setString(2,homework.getTitle());
@@ -142,7 +146,7 @@ public class StudentHomeworkJdbc {
         }
 
         List<Homework> list = new ArrayList<>();
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+        try(Connection connection =  dataSource.getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -173,7 +177,7 @@ public class StudentHomeworkJdbc {
         String sqlString = "SELECT * FROM s_student_homework WHERE homework_id=" + id;
 
         List<StudentHomework> list = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+        try (Connection connection = dataSource.getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     while (resultSet.next()) {
@@ -207,7 +211,7 @@ public class StudentHomeworkJdbc {
         String sqlString = "SELECT * FROM homework WHERE h_id=" + id;
 
         Homework homework = new Homework();
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+        try (Connection connection = dataSource.getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     //获取执行结果
@@ -238,7 +242,7 @@ public class StudentHomeworkJdbc {
         }
 
         List<Student> list = new ArrayList<>();
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+        try(Connection connection =  dataSource.getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
