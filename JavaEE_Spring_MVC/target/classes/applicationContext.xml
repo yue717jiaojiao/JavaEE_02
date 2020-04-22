@@ -6,14 +6,17 @@
 
     <context:component-scan base-package = "code.controller" />
     <context:component-scan base-package = "code.aspect" />
-<!--    <context:component-scan base-package = "code.bean" />-->
+   <context:component-scan base-package = "code.bean" />
     <context:component-scan base-package = "code.service" />
+    <context:component-scan base-package = "code.jdbc" />
+
 <!--id唯一标识bean，一个bean可以用多个名称-->
 <!--    <bean id="testBean" class="code.bean.TestBean" scope="prototype" name="testBean,testBean2">-->
-<!--&lt;!&ndash;        初始化&ndash;&gt;-->
-<!--&lt;!&ndash;        <constructor-arg type="java.lang.Long" value="1"></constructor-arg>&ndash;&gt;-->
-<!--&lt;!&ndash;        <constructor-arg type="java.lang.String" value="One Name"></constructor-arg>&ndash;&gt;-->
+<!--        初始化-->
+<!--        <constructor-arg type="java.lang.Long" value="1"></constructor-arg>-->
+<!--        <constructor-arg type="java.lang.String" value="One Name"></constructor-arg>-->
 <!--        <constructor-arg name="id" value="1"></constructor-arg>-->
 <!--        <constructor-arg name="name" value="One Name"></constructor-arg>-->
 <!--    </bean>-->
+
 </beans>

@@ -23,6 +23,7 @@ public class TestBean {
         return new TestBean(1L,"init name");
     }
 
+    @Override
     public String toString(){
         return "TestBean{"+
                 "id="+ id +

@@ -1,4 +1,4 @@
-<%@ page import="com.java.code.model.Homework" %>
+<%@ page import="code.model.Homework" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ASUS

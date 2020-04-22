@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 
 public class JdbcService {
 
-    public void getById(Long id){
+    public Long getById(Long id){
         System.out.println("getById " + id +"}");
+        return id;
     }
 }

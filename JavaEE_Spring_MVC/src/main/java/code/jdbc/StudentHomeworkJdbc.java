@@ -26,14 +26,16 @@ public class StudentHomeworkJdbc {
     private static String driverName = "com.mysql.cj.jdbc.Driver";
     private static HikariDataSource dataSource = getHikariDataSource();
 
-                        public static boolean addStudentHomework(StudentHomework sh){
-
+    public static boolean addStudentHomework(StudentHomework sh) throws SQLException {
+        Connection connection = null;
         int resultSet = 0;
         try {
             Class.forName(driverName);
             String sqlString = "insert into s_student_homework (student_id,homework_id,homework_title,homework_content,student_answer,create_time) values(?,?,?,?,?,?)";
 
-            Connection connection = dataSource.getConnection();
+            connection = dataSource.getConnection();
+            //不自动commit
+            connection.setAutoCommit(false);
             PreparedStatement ps = connection.prepareStatement(sqlString);
 
             ps.setLong(1,sh.getStudentId());
@@ -44,16 +46,17 @@ public class StudentHomeworkJdbc {
             ps.setTimestamp(6,new Timestamp(sh.getCreateTime().getTime()));
             resultSet = ps.executeUpdate();
 
-
+            connection.commit();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return resultSet != 0;
 
     }
 
-    public static List<StudentHomework> selectAll(){
+    public static List<StudentHomework> selectAll()throws SQLException {
 
         String sqlString = "SELECT * FROM s_student_homework";
 
@@ -64,9 +67,11 @@ public class StudentHomeworkJdbc {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        Connection connection = null;
         List<StudentHomework> list = new ArrayList<>();
-        try(Connection connection =  dataSource.getConnection()) {
+        try{
+            connection =  dataSource.getConnection();
+            connection.setAutoCommit(false);
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -80,45 +85,53 @@ public class StudentHomeworkJdbc {
                         sh.setCreateTime(resultSet.getTimestamp("create_time"));
                         list.add(sh);
                     }
+                    connection.commit();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return list;
     }
 
-    public static boolean addStudent(Student student) {
+    public static boolean addStudent(Student student) throws SQLException {
         int resultSet = 0;
+        Connection connection =null;
         try {
             Class.forName(driverName);
             String sqlString = "insert into student (id,sname,create_time) values(?,?,?)";
 
-        Connection connection = dataSource.getConnection();;
+        connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
         PreparedStatement ps = connection.prepareStatement(sqlString);
                 ps.setLong(1,student.getId());
                 ps.setString(2,student.getName());
                 ps.setTimestamp(3,new Timestamp(student.getCreateTime().getTime()));
                 resultSet = ps.executeUpdate();
 
-
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return resultSet != 0;
     }
 
-    public static boolean addHomework(Homework homework) {
+    public static boolean addHomework(Homework homework) throws SQLException {
         int resultSet = 0;
+        Connection connection =null;
         try {
             Class.forName(driverName);
             String sqlString = "insert into homework (h_id,title,content,create_time) values(?,?,?,?)";
 
-            Connection connection = dataSource.getConnection();
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
             PreparedStatement ps = connection.prepareStatement(sqlString);
             ps.setLong(1,homework.getId());
             ps.setString(2,homework.getTitle());
@@ -127,17 +140,18 @@ public class StudentHomeworkJdbc {
 
             resultSet = ps.executeUpdate();
 
-
+            connection.commit();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return resultSet != 0;
     }
 
-    public static List<Homework> selectAllhw() {
+    public static List<Homework> selectAllhw() throws SQLException {
         String sqlString = "SELECT * FROM homework";
-
+        Connection connection =null;
         try {
             // 加载驱动
             Class.forName(driverName);
@@ -146,7 +160,9 @@ public class StudentHomeworkJdbc {
         }
 
         List<Homework> list = new ArrayList<>();
-        try(Connection connection =  dataSource.getConnection()) {
+        try{
+            connection =  dataSource.getConnection();
+            connection.setAutoCommit(false);
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -158,26 +174,30 @@ public class StudentHomeworkJdbc {
                         homework.setCreateTime(resultSet.getTimestamp("create_time"));
                         list.add(homework);
                     }
+                    connection.commit();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return list;
     }
 
-    public static List<StudentHomework> selectStudentHomeworkbyid(String id) {
+    public static List<StudentHomework> selectStudentHomeworkbyid(String id) throws SQLException {
         try {
             Class.forName(driverName);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        Connection connection =null;
         String sqlString = "SELECT * FROM s_student_homework WHERE homework_id=" + id;
 
         List<StudentHomework> list = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection()) {
+        try {
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     while (resultSet.next()) {
@@ -192,16 +212,18 @@ public class StudentHomeworkJdbc {
                         sh.setUpdateTime(resultSet.getTimestamp("update_time"));
                         list.add(sh);
                     }
+                    connection.commit();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
 
         return list;
     }
-    public static Homework selectHomeworkbyid(String id) {
+    public static Homework selectHomeworkbyid(String id) throws SQLException {
         try {
             Class.forName(driverName);
         } catch (ClassNotFoundException e) {
@@ -209,9 +231,11 @@ public class StudentHomeworkJdbc {
         }
 
         String sqlString = "SELECT * FROM homework WHERE h_id=" + id;
-
+        Connection connection =null;
         Homework homework = new Homework();
-        try (Connection connection = dataSource.getConnection()) {
+        try {
+            connection = dataSource.getConnection();
+            connection.setAutoCommit(false);
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     //获取执行结果
@@ -221,17 +245,19 @@ public class StudentHomeworkJdbc {
                         homework.setContent(resultSet.getString("content"));
                         homework.setCreateTime(resultSet.getTimestamp("create_time"));
                     }
+                    connection.commit();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
 
         return homework;
     }
 
-    public static List<Student> selectAllstudent() {
+    public static List<Student> selectAllstudent() throws SQLException {
         String sqlString = "SELECT * FROM student";
 
         try {
@@ -240,9 +266,11 @@ public class StudentHomeworkJdbc {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
+        Connection connection = null;
         List<Student> list = new ArrayList<>();
-        try(Connection connection =  dataSource.getConnection()) {
+        try{
+            connection =  dataSource.getConnection();
+            connection.setAutoCommit(false);
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -253,10 +281,12 @@ public class StudentHomeworkJdbc {
                         sdu.setCreateTime(resultSet.getTimestamp("create_time"));
                         list.add(sdu);
                     }
+                    connection.commit();
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            connection.rollback();
         }
 
         return list;
