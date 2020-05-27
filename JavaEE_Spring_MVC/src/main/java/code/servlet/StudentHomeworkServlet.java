@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -25,7 +26,12 @@ public class StudentHomeworkServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //查找所有已布置作业
-        List<Homework> list = StudentHomeworkJdbc.selectAllhw();
+        List<Homework> list = null;
+        try {
+            list = StudentHomeworkJdbc.selectAllhw();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         req.setAttribute("homework", list);
 

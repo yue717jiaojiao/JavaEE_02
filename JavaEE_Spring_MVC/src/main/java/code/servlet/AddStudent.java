@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 @WebServlet("/Add_student")
@@ -23,7 +24,12 @@ public class AddStudent extends HttpServlet {
         Date date = new Date();
         student.setCreateTime(date);
 
-        boolean result = StudentHomeworkJdbc.addStudent(student);
+        boolean result = false;
+        try {
+            result = StudentHomeworkJdbc.addStudent(student);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //判断是否添加学生成功
         req.setAttribute("judge", result);

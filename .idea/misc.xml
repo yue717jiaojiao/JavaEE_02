@@ -3,15 +3,27 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/JavaEE_01" />
+    <file type="web" url="file://$PROJECT_DIR$/JavaEE_Spring_MVC" />
+    <file type="web" url="file://$PROJECT_DIR$/Spring-BootDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/Springboot-Demo" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/Springboot-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/Springboot/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Spring-BootDemo/pom.xml" />
+        <option value="$PROJECT_DIR$/Springboot-Demo/pom.xml" />
+        <option value="$PROJECT_DIR$/Springboot-demo/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" project-jdk-name="10" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -13,6 +13,11 @@
         <module>JavaEE_02</module>
         <module>core</module>
         <module>db</module>
+        <module>JavaEE_Spring_MVC</module>
+        <module>Springboot-Demo</module>
+        <module>Spring-BootDemo</module>
+        <module>Springboot-Demo</module>
+        <module>Springboot-demo</module>
     </modules>
     <dependencies>
         <dependency>

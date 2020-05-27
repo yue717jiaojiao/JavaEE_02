@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 @WebServlet("/Add_homework")
@@ -25,7 +26,12 @@ public class AddHomework extends HttpServlet {
         Date date = new Date();
         homework.setCreateTime(date);
 
-        boolean result = StudentHomeworkJdbc.addHomework(homework);
+        boolean result = false;
+        try {
+            result = StudentHomeworkJdbc.addHomework(homework);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //判断是否添加作业成功
         req.setAttribute("judge", result);

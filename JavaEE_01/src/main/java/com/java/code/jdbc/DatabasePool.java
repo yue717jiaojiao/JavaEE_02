@@ -15,7 +15,7 @@ public class DatabasePool {
         }
 
         synchronized (DatabasePool.class) {
-            if (null != hikariDataSource) {
+            if (null == hikariDataSource) {
                 HikariConfig hikariConfig = new HikariConfig();
                 String driverName = "com.mysql.cj.jdbc.Driver";
                 hikariConfig.setUsername("root");

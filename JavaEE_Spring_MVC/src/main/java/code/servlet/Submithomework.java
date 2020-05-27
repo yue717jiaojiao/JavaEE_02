@@ -10,18 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 
 @WebServlet("/submit_homework")
 public class Submithomework extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
 
         //读取指定id的作业内容详细信息
-        Homework homework = StudentHomeworkJdbc.selectHomeworkbyid(id);
+        Homework homework = null;
+        try {
+            homework = StudentHomeworkJdbc.selectHomeworkbyid(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         req.setAttribute("homework",homework);
         req.getRequestDispatcher("function/Add_student_homework.jsp").forward(req,resp);
     }
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("utf-8");
@@ -36,7 +44,12 @@ public class Submithomework extends HttpServlet {
         Date date = new Date();
         studentHomework.setCreateTime(date);
 
-        boolean result = StudentHomeworkJdbc.addStudentHomework(studentHomework);
+        boolean result = false;
+        try {
+            result = StudentHomeworkJdbc.addStudentHomework(studentHomework);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //判断是否提交作业成功
         req.setAttribute("judge", result);

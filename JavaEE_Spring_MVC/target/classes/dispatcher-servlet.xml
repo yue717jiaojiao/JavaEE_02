@@ -9,4 +9,5 @@
     <context:component-scan base-package = "code.aspect" />
     <context:component-scan base-package = "code.bean" />
     <context:component-scan base-package = "code.service" />
+    <context:component-scan base-package = "code.jdbc" />
 </beans>
