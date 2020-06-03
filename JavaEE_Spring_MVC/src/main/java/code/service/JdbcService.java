@@ -1,5 +1,6 @@
 package code.service;
 
+/*
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,3 +12,4 @@ public class JdbcService {
         return id;
     }
 }
+*/

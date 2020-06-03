@@ -1,6 +1,7 @@
+
 package code.servlet;
 
-
+/*
 import code.jdbc.StudentHomeworkJdbc;
 import code.model.Student;
 
@@ -20,7 +21,7 @@ public class AddStudent extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         Student student = new Student();
         student.setId(Long.parseLong(req.getParameter("sid")));
-        student.setName(req.getParameter("sname"));
+        student.setSname(req.getParameter("sname"));
         Date date = new Date();
         student.setCreateTime(date);
 
@@ -40,3 +41,4 @@ public class AddStudent extends HttpServlet {
 
 
 }
+*/

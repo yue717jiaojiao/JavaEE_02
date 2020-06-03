@@ -1,5 +1,6 @@
 package code.jdbc;
 
+/*
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
@@ -35,3 +36,4 @@ public class DatabasePool {
         return null;
     }
 }
+*/

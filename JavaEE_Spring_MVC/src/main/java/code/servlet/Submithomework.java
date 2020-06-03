@@ -1,5 +1,6 @@
-package code.servlet;
 
+package code.servlet;
+/*
 import code.jdbc.StudentHomeworkJdbc;
 import code.model.Homework;
 import code.model.StudentHomework;
@@ -40,7 +41,7 @@ public class Submithomework extends HttpServlet {
         studentHomework.setHomeworkId(Long.parseLong(req.getParameter("homeworkId")));
         studentHomework.setHomeworkTitle(req.getParameter("title"));
         studentHomework.setHomeworkContent(req.getParameter("content"));
-        studentHomework.setstudentAnswer(req.getParameter("student_answer"));
+        studentHomework.setStudentAnswer(req.getParameter("student_answer"));
         Date date = new Date();
         studentHomework.setCreateTime(date);
 
@@ -57,3 +58,4 @@ public class Submithomework extends HttpServlet {
         req.getRequestDispatcher("function/judge.jsp").forward(req,resp);
     }
 }
+*/

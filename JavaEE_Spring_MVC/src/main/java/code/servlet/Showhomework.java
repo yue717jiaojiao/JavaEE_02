@@ -1,6 +1,6 @@
 package code.servlet;
 
-
+/*
 import code.jdbc.StudentHomeworkJdbc;
 import code.model.StudentHomework;
 
@@ -31,3 +31,4 @@ public class Showhomework extends HttpServlet {
         req.getRequestDispatcher("function/Check_situation.jsp").forward(req,resp);
     }
 }
+*/

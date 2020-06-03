@@ -1,5 +1,6 @@
-package code.servlet;
 
+package code.servlet;
+/*
 
 
 import code.jdbc.StudentHomeworkJdbc;
@@ -39,3 +40,4 @@ public class AddHomework extends HttpServlet {
         req.getRequestDispatcher("function/judge.jsp").forward(req,resp);
     }
 }
+*/

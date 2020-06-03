@@ -16,7 +16,7 @@
 <body>
 <div align="center">
     <h2>提交作业</h2>
-    <form method="post" action="${pageContext.request.contextPath}/submit_homework">
+    <form method="post" action="${pageContext.request.contextPath}/submit">
         <table align="center"  border="1" width="960" cellpadding="1" cellspacing="1">
             <%
                 Homework homework = (Homework) request.getAttribute("homework");

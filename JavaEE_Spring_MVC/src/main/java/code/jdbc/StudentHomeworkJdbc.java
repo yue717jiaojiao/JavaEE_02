@@ -1,6 +1,7 @@
+
 package code.jdbc;
 
-
+/*
 import code.model.Homework;
 import code.model.Student;
 import code.model.StudentHomework;
@@ -12,13 +13,15 @@ import java.util.List;
 
 import static code.jdbc.DatabasePool.getHikariDataSource;
 
+*/
 /**
  * StudentHomeworkJdbc
  *
  * @author wangkm
  * @date 2020-03-05
  * @since 0.0.1
- */
+ *//*
+
 public class StudentHomeworkJdbc {
 
     private static String url = "jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC";
@@ -292,3 +295,4 @@ public class StudentHomeworkJdbc {
         return list;
     }
 }
+*/
