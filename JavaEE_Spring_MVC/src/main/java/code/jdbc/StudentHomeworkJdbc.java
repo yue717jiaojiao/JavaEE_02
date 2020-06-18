@@ -1,7 +1,4 @@
-
 package code.jdbc;
-
-/*
 import code.model.Homework;
 import code.model.Student;
 import code.model.StudentHomework;
@@ -13,14 +10,7 @@ import java.util.List;
 
 import static code.jdbc.DatabasePool.getHikariDataSource;
 
-*/
-/**
- * StudentHomeworkJdbc
- *
- * @author wangkm
- * @date 2020-03-05
- * @since 0.0.1
- *//*
+
 
 public class StudentHomeworkJdbc {
 
@@ -81,8 +71,8 @@ public class StudentHomeworkJdbc {
                     while (resultSet.next()){
                         StudentHomework sh = new StudentHomework();
 
-                        sh.setStudentId(resultSet.getLong("student_id"));
-                        sh.setHomeworkId(resultSet.getLong("homework_id"));
+                        sh.setStudentId(resultSet.getInt("student_id"));
+                        sh.setHomeworkId(resultSet.getInt("homework_id"));
                         sh.setHomeworkTitle(resultSet.getString("homework_title"));
                         sh.setHomeworkContent(resultSet.getString("homework_content"));
                         sh.setCreateTime(resultSet.getTimestamp("create_time"));
@@ -110,7 +100,7 @@ public class StudentHomeworkJdbc {
             connection.setAutoCommit(false);
         PreparedStatement ps = connection.prepareStatement(sqlString);
                 ps.setLong(1,student.getId());
-                ps.setString(2,student.getName());
+                ps.setString(2,student.getSname());
                 ps.setTimestamp(3,new Timestamp(student.getCreateTime().getTime()));
                 resultSet = ps.executeUpdate();
 
@@ -171,7 +161,7 @@ public class StudentHomeworkJdbc {
                     // 获取执行结果
                     while (resultSet.next()){
                         Homework homework = new Homework();
-                        homework.setId(resultSet.getLong("h_id"));
+                        homework.setId(resultSet.getInt("h_id"));
                         homework.setTitle(resultSet.getString("title"));
                         homework.setContent(resultSet.getString("content"));
                         homework.setCreateTime(resultSet.getTimestamp("create_time"));
@@ -206,11 +196,11 @@ public class StudentHomeworkJdbc {
                     while (resultSet.next()) {
                         StudentHomework sh = new StudentHomework();
 
-                        sh.setStudentId(resultSet.getLong("student_id"));
-                        sh.setHomeworkId(resultSet.getLong("homework_id"));
+                        sh.setStudentId(resultSet.getInt("student_id"));
+                        sh.setHomeworkId(resultSet.getInt("homework_id"));
                         sh.setHomeworkTitle(resultSet.getString("homework_title"));
                         sh.setHomeworkContent(resultSet.getString("homework_content"));
-                        sh.setstudentAnswer(resultSet.getString("student_answer"));
+                        sh.setStudentAnswer(resultSet.getString("student_answer"));
                         sh.setCreateTime(resultSet.getTimestamp("create_time"));
                         sh.setUpdateTime(resultSet.getTimestamp("update_time"));
                         list.add(sh);
@@ -243,7 +233,7 @@ public class StudentHomeworkJdbc {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     //获取执行结果
                     while (resultSet.next()) {
-                        homework.setId(resultSet.getLong("h_id"));
+                        homework.setId(resultSet.getInt("h_id"));
                         homework.setTitle(resultSet.getString("title"));
                         homework.setContent(resultSet.getString("content"));
                         homework.setCreateTime(resultSet.getTimestamp("create_time"));
@@ -279,8 +269,8 @@ public class StudentHomeworkJdbc {
                     // 获取执行结果
                     while (resultSet.next()){
                         Student sdu = new Student();
-                        sdu.setId(resultSet.getLong("id"));
-                        sdu.setName(resultSet.getString("sname"));
+                        sdu.setId(resultSet.getInt("id"));
+                        sdu.setSname(resultSet.getString("sname"));
                         sdu.setCreateTime(resultSet.getTimestamp("create_time"));
                         list.add(sdu);
                     }
@@ -295,4 +285,5 @@ public class StudentHomeworkJdbc {
         return list;
     }
 }
-*/
+
+

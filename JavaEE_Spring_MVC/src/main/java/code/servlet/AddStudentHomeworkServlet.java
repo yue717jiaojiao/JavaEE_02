@@ -13,13 +13,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-*//**
- * AddStudentHomeworkServlet
- *
- * @author wangkm
- * @date 2020-03-05
- * @since 0.0.1
- *//*
+*/
+ /*
 //提交作业
 @WebServlet("/Add_student_homework")
 public class AddStudentHomeworkServlet extends HttpServlet {

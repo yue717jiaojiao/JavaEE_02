@@ -6,8 +6,13 @@
 <mapper namespace="code.dao.StudentDao">
 
     <insert id="add" parameterType="Student">
-        insert into student (id,sname,create_time) value (#{id}, #{sname}, #{createTime})
+        insert into student (id,sname,create_time,password) value (#{id}, #{sname}, #{createTime},#{password})
     </insert>
     <delete id="delete"></delete>
+
     <select id="select" resultType="code.model.Student"></select>
+
+    <select id="getStudentbyid" resultType="code.model.Student" parameterType="String">
+        SELECT * FROM student WHERE id=#{id}
+    </select>
 </mapper>

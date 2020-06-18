@@ -8,8 +8,9 @@ import java.util.Date;
 @Setter
 @Getter
 public class Student {
-    private long id;
+    private int id;
     private String sname;
     private Date createTime;
     private Date updateTime;
+    private String password;
 }

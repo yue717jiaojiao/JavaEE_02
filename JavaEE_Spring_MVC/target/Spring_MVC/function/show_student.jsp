@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="code.model.Student" %>
-<%@ page import="code.jdbc.StudentHomeworkJdbc" %><%--
-  Created by IntelliJ IDEA.
+<%@ page import="code.jdbc.StudentHomeworkJdbc" %>
+Created by IntelliJ IDEA.
   User: ASUS
   Date: 2020-03-12
   Time: 9:48
@@ -34,7 +34,7 @@
         <tr align="center" bgcolor="white" height="30">
 
             <td><%=sh.getId()%></td>
-            <td><%=sh.getName()%></td>
+            <td><%=sh.getSname()%></td>
             <td><%=sh.getCreateTime()%></td>
         </tr>
         <%

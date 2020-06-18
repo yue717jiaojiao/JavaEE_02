@@ -14,7 +14,7 @@
 <div align="center">
 <h2>输入新作业相关信息</h2>
     <form action="${pageContext.request.contextPath}/Add_homework" method="post">
-        请输入作业id:<input type="number" name="hid" maxlength="20" required><br/>
+        请输入作业id:<input type="number" name="id" maxlength="20" required><br/>
         请输入作业题目:<input type="text" name="title" maxlength="20" required><br/>
 
         请输入作业内容:<textarea cols="13" rows="10" name="content" onpropertychange="if(this.scrollHeight>10) this.style.posHeight=this.scrollHeight+5"

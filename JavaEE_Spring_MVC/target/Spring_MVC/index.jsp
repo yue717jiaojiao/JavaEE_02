@@ -1,6 +1,5 @@
 <%@ page import="code.model.StudentHomework" %>
 <%@ page import="java.util.List" %>
-<%@ page import="code.jdbc.StudentHomeworkJdbc" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -17,14 +16,12 @@
 <body>
 
 <div align="center">
-    <h2>请选择你要进行的操作:</h2>
+    <h2>请选择您的身份:</h2>
     <h2>${pageContext.request.contextPath}</h2>
     <ul>
-        <a href="function/Add_student.jsp">添加学生</a>
-        <a href="function/Add_homework.jsp">布置作业</a>
+        <a href="function/Studentpart.jsp">学生</a>
+        <a href="function/teacherpart.jsp">老师</a>
 
-        <a href="${pageContext.request.contextPath}/Add_student_homework">提交作业</a>
-        <a href="${pageContext.request.contextPath}/show_homework">查询情况</a>
     </ul>
 </div>
 

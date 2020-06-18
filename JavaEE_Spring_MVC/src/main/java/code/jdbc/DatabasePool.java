@@ -1,6 +1,5 @@
 package code.jdbc;
 
-/*
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +22,7 @@ public class DatabasePool {
             if (null == hikariDataSource) {
                 HikariConfig hikariConfig = new HikariConfig();
                 String driverName = "com.mysql.cj.jdbc.Driver";
-                hikariConfig.setUsername("root");
+                hikariConfig.setUsername("my");
                 hikariConfig.setPassword("123456");
                 hikariConfig.setDriverClassName(driverName);
                 hikariConfig.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/test?serverTimezone=UTC");
@@ -36,4 +35,4 @@ public class DatabasePool {
         return null;
     }
 }
-*/
+

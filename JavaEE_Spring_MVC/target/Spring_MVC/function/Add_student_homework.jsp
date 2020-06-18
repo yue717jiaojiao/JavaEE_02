@@ -1,6 +1,5 @@
 <%@ page import="code.model.StudentHomework" %>
 <%@ page import="java.util.List" %>
-<%@ page import="code.jdbc.StudentHomeworkJdbc" %>
 <%@ page import="code.model.Homework" %><%--
   Created by IntelliJ IDEA.
   User: ASUS

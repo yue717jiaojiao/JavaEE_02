@@ -1,11 +1,14 @@
 package code.controller;
 
+import code.model.Student;
+import code.model.Teacher;
 import code.service.AllServiceImpl;
 import code.model.Homework;
 import code.model.StudentHomework;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -16,12 +19,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * @author: dengzhiwen
- * @Date: 2020/3/28 17:58
- */
 
 @Controller
 public class ApiController {
@@ -33,7 +35,7 @@ public class ApiController {
         this.allService = allService;
     }
 
-    @RequestMapping(path = "/show_Homework", method = RequestMethod.GET)
+    @RequestMapping(path = "/show_homework", method = RequestMethod.GET)
     public ModelAndView showHomework() {
         List<Homework> list = allService.showHomework();
         return new ModelAndView("/function/check_homework.jsp", "list", list);
@@ -48,37 +50,39 @@ public class ApiController {
 
     //提交作业2，读取指定信息
     @RequestMapping(path = "/submit_homework", method = RequestMethod.GET)
-    public ModelAndView willSubmit() {
+    public ModelAndView willSubmit() throws UnsupportedEncodingException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
-
+        System.out.println(id);
         Homework homework = allService.showHomeworkDetails(id);
         return new ModelAndView("function/Add_student_homework.jsp", "homework", homework);
     }
     //最后一个提交
     @RequestMapping(path = "/submit", method = RequestMethod.POST)
-    public void submit() {
+    public ModelAndView submit() throws UnsupportedEncodingException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest req = attributes.getRequest();
         HttpServletResponse resp = attributes.getResponse();
-
+        req.setCharacterEncoding("UTF-8");
         boolean result = allService.addStudentHomework(req);
         //用于判断是否提交成功
-        req.setAttribute("judge", result);
-        req.setAttribute("type", "addStudentHomework");
-        try {
-            req.getRequestDispatcher("function/judge.jsp").forward(req, resp);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-        }
+
+        ModelMap model = new ModelMap();
+        model.addAttribute("judge", result);
+        model.addAttribute("type", "addStudentHomework");
+
+        return new ModelAndView("result.jsp", "model", model);
 
     }
 
     @RequestMapping(path = "/submitted_homework", method = RequestMethod.GET)
-    public ModelAndView query() {
+    public ModelAndView query() throws UnsupportedEncodingException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+
         HttpServletRequest request = attributes.getRequest();
+        request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
         //从数据库读取指定作业id的所有记录
         List<StudentHomework> list = allService.selectAll(id);
@@ -86,40 +90,82 @@ public class ApiController {
     }
 
     @RequestMapping(path = "/Add_homework", method = RequestMethod.POST)
-    public void addHomework() {
+    public ModelAndView addHomework() throws UnsupportedEncodingException {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         HttpServletResponse resp = attributes.getResponse();
+        request.setCharacterEncoding("UTF-8");
         boolean result = allService.addHomework(request);
-
         //用来判断是否添加作业成功
-        request.setAttribute("isOK", result);
-        request.setAttribute("type", "addHomework");
-        try {
-            request.getRequestDispatcher("function/judge.jsp").forward(request, resp);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
-        }
+
+        ModelMap model = new ModelMap();
+        model.addAttribute("judge", result);
+        model.addAttribute("type", "addHomework");
+
+        return new ModelAndView("result.jsp", "model", model);
     }
 
-    @RequestMapping(path = "/Add_student", method = RequestMethod.POST)
-    public void addStudent() {
+    @RequestMapping(path = "/Add_student",method = RequestMethod.POST)
+    public ModelAndView addStudent() throws UnsupportedEncodingException {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         HttpServletResponse resp = attributes.getResponse();
-
+        request.setCharacterEncoding("UTF-8");
         boolean result = allService.addStudent(request);
 
         //用来判断是否添加学生成功
-        request.setAttribute("isOK", result);
-        request.setAttribute("type", "addStudent");
-        try {
-            request.getRequestDispatcher("function/judge.jsp").forward(request, resp);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
+        ModelMap model = new ModelMap();
+            model.addAttribute("judge", result);
+            model.addAttribute("type", "addStudent");
+
+        return new ModelAndView("result.jsp", "model", model);
+    }
+    @RequestMapping(path = "/Add_teacher",method = RequestMethod.POST)
+    public ModelAndView addTeacher() throws UnsupportedEncodingException {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        HttpServletResponse resp = attributes.getResponse();
+        request.setCharacterEncoding("UTF-8");
+        boolean result = allService.addTeacher(request);
+
+        ModelMap model = new ModelMap();
+        model.addAttribute("judge", result);
+        model.addAttribute("type", "addTeacher");
+
+        return new ModelAndView("result.jsp", "model", model);
+    }
+    //登录
+    @RequestMapping(path = "/student_login", method = RequestMethod.POST)
+    public ModelAndView studentlogin() throws UnsupportedEncodingException {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        Student student = allService.studentlogin(id);
+
+        if (password.equals(student.getPassword())) {
+
+            return new ModelAndView("function/studentpart1.jsp");
+        } else {
+            return null;
         }
     }
+    @RequestMapping(path = "/teacher_login", method = RequestMethod.POST)
+    public ModelAndView teacherlogin() throws UnsupportedEncodingException {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        request.setCharacterEncoding("UTF-8");
+        String id = request.getParameter("id");
+        String password = request.getParameter("password");
+        Teacher teacher = allService.teacherlogin(id);
 
+        if (password.equals(teacher.getPassword())) {
 
+            return new ModelAndView("function/teacherpart1.jsp");
+        } else {
+            return null;
+        }
+    }
 }

@@ -15,13 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 */
-/**
- * StudentHomeworkServlet
- *
- * @author wangkm
- * @date 2020-03-05
- * @since 0.0.1
- *//*
+/*
 
 //显示作业完成情况
 @WebServlet("/show_homework")

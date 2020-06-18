@@ -14,9 +14,9 @@
 <div align="center">
     <h2>新学生信息</h2>
     <form action="${pageContext.request.contextPath}/Add_student" method="post">
-            请输入学号:<input type="number" name="sid" maxlength="20" style="font-family: arial" required><br/>
-            请输入姓名:<input type="text" name="sname" maxlength="20" style="font-family: arial" required><br/>
-
+            请输入学号:<input type="number" name="id" maxlength="20" style="font-family: arial" required><br/>
+            请输入姓名:<input type="text" name="name" maxlength="20" style="font-family: arial" required><br/>
+        请输入密码（默认123456）:<input type="text" name="password" maxlength="20" style="font-family: arial" required><br/>
 
              <input type="reset" value="清空">
              <input type="submit" value="提交"><br/>

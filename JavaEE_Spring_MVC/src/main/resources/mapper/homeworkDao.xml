@@ -6,7 +6,7 @@
 <mapper namespace="code.dao.HomeworkDao">
 
     <insert id="add" parameterType="Homework">
-        insert into homework (title,content,create_time) values(#{title},#{content},#{createTime})
+        insert into homework (id,title,content,create_time) values(#{id},#{title},#{content},#{createTime})
     </insert>
     <update id="change"></update>
     <delete id="delete"></delete>

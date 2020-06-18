@@ -15,10 +15,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!--开启组件扫描-->
-    <context:component-scan base-package="code.dao" />
-    <context:component-scan base-package="code.controller" />
-    <context:component-scan base-package="code.service" />
-    <context:component-scan base-package="code.model" />
+    <context:component-scan base-package="code" />
 
 
     <context:property-placeholder location="classpath:jdbc.properties"/>
@@ -36,13 +33,13 @@
         <!--        mybatis配置文件-->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--        实体类-->
-        <property name="typeAliasesPackage" value="org.example.spring.mvc.model"/>
+        <property name="typeAliasesPackage" value="code.model"/>
         <!--        mapper-->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-          p:basePackage="org.example.spring.mvc.dao"
+          p:basePackage="code.dao"
           p:sqlSessionFactoryBeanName="sqlSessionFactory">
     </bean>
 

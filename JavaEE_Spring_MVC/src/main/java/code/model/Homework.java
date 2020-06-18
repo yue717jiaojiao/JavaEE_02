@@ -8,7 +8,7 @@ import java.util.Date;
 @Setter
 @Getter
 public class Homework {
-    private long id;
+    private int id;
     private String Title;
     private String Content;
     private Date createTime;

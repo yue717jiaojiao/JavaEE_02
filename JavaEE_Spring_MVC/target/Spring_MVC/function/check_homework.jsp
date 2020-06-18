@@ -40,7 +40,7 @@
         </tr>
 
         <%
-            List<Homework> list = (List<Homework>)request.getAttribute("homework");
+            List<Homework> list = (List<Homework>)request.getAttribute("list");
             if (list == null || list.size() <= 0){
                out.print("None data");
             }else {
