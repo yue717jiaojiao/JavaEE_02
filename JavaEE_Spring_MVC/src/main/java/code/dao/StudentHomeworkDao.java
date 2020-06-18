@@ -1,6 +1,7 @@
 package code.dao;
 
 import code.model.StudentHomework;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface StudentHomeworkDao {
 
 
     List<StudentHomework> getAll(String id);
+
+    List<StudentHomework> ifhave(@Param("studentId") String studentId, @Param("homeworkId") String homeworkId);
 }

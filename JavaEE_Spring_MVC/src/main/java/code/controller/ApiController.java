@@ -66,7 +66,13 @@ public class ApiController {
         HttpServletRequest req = attributes.getRequest();
         HttpServletResponse resp = attributes.getResponse();
         req.setCharacterEncoding("UTF-8");
-        boolean result = allService.addStudentHomework(req);
+        boolean result;
+        boolean ifhave = allService.ifhave(req);
+        if(!ifhave) {
+            result = allService.addStudentHomework(req);
+        }else{
+            result = allService.changeStudentHomework(req);
+        }
         //用于判断是否提交成功
 
         ModelMap model = new ModelMap();

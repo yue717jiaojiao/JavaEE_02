@@ -93,6 +93,20 @@ public class AllServiceImpl implements AllService{
     }
 
     @Override
+    public boolean ifhave(HttpServletRequest req) {
+        String studentId = req.getParameter("studentId");
+        System.out.println(studentId);
+        String homeworkId = req.getParameter("homeworkId");
+        System.out.println(homeworkId);
+        List<StudentHomework> a =studentHomeworkDao.ifhave(studentId,homeworkId);
+        boolean tem = false;
+        if(!a.isEmpty()){
+            tem = true;
+        }
+        return tem;
+    }
+
+    @Override
     public boolean addStudentHomework(HttpServletRequest req){
         StudentHomework studentHomework = new StudentHomework();
         studentHomework.setStudentId((int) Long.parseLong(req.getParameter("studentId")));
@@ -103,6 +117,19 @@ public class AllServiceImpl implements AllService{
         Date date = new Date();
         studentHomework.setCreateTime(date);
         return studentHomeworkDao.add(studentHomework);
+    }
+
+    @Override
+    public boolean changeStudentHomework(HttpServletRequest req) {
+        StudentHomework studentHomework = new StudentHomework();
+        studentHomework.setStudentId((int) Long.parseLong(req.getParameter("studentId")));
+        studentHomework.setHomeworkId((int) Long.parseLong(req.getParameter("homeworkId")));
+        studentHomework.setHomeworkTitle(req.getParameter("title"));
+        studentHomework.setHomeworkContent(req.getParameter("content"));
+        studentHomework.setStudentAnswer(req.getParameter("student_answer"));
+        Date date = new Date();
+        studentHomework.setCreateTime(date);
+        return studentHomeworkDao.edit(studentHomework);
     }
 
 }

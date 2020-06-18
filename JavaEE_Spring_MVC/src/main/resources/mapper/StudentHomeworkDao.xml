@@ -11,9 +11,15 @@
             (student_id,homework_id,homework_title,homework_content,student_answer,create_time)
              values(#{studentId},#{homeworkId},#{homeworkTitle},#{homeworkContent},#{studentAnswer},#{createTime})
     </insert>
-    <update id="edit"></update>
+    <update id="edit">
+        UPDATE s_student_homework SET student_answer = #{studentAnswer} WHERE homework_id=#{homeworkId} and student_id = #{studentId}
+    </update>
+
     <delete id="delete"></delete>
     <select id="getAll" resultType="code.model.StudentHomework">
         SELECT * FROM s_student_homework WHERE homework_id=#{id}
+    </select>
+    <select id="ifhave" resultType="code.model.StudentHomework">
+        SELECT * FROM s_student_homework WHERE student_id = #{studentId} and homework_id=#{homeworkId}
     </select>
 </mapper>

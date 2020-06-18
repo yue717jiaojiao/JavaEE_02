@@ -20,6 +20,7 @@ public interface AllService {
 
     boolean addStudentHomework(HttpServletRequest req);
 
+    boolean changeStudentHomework(HttpServletRequest req);
 
     List<StudentHomework> selectAll(String id);
 
@@ -32,4 +33,8 @@ public interface AllService {
     Student studentlogin(String id);
 
     Teacher teacherlogin(String id);
+
+    boolean ifhave(HttpServletRequest req);
+
+
 }
